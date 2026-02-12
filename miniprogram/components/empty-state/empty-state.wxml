@@ -1,0 +1,14 @@
+<view class="empty-state">
+  <view class="empty-icon">
+    <view class="empty-icon-box">
+      <view class="empty-icon-line"></view>
+      <view class="empty-icon-line short"></view>
+      <view class="empty-icon-line shorter"></view>
+    </view>
+  </view>
+  <text class="empty-text">{{text || '暂无数据'}}</text>
+  <text class="empty-subtext" wx:if="{{subText}}">{{subText}}</text>
+  <view class="empty-action" wx:if="{{actionText}}" bindtap="onAction">
+    <text>{{actionText}}</text>
+  </view>
+</view>

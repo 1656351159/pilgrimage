@@ -1,0 +1,8 @@
+<view class="loading-container" wx:if="{{visible}}">
+  <view class="loading-spinner">
+    <view class="spinner-dot" wx:for="{{[1,2,3]}}" wx:key="*this"
+      style="animation-delay: {{(item - 1) * 0.15}}s;">
+    </view>
+  </view>
+  <text class="loading-text" wx:if="{{text}}">{{text}}</text>
+</view>

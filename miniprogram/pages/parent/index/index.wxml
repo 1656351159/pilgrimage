@@ -1,0 +1,82 @@
+<view class="page-container">
+  <!-- 头部区域 -->
+  <view class="header">
+    <view class="header-bg"></view>
+    <view class="header-content">
+      <view class="user-info">
+        <view class="avatar-wrap">
+          <text class="avatar-text">{{userInfo.name ? userInfo.name[0] : '家'}}</text>
+        </view>
+        <view class="user-detail">
+          <text class="user-name">{{userInfo.name || '家长'}}</text>
+          <text class="user-role">家长端</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 子女选择 -->
+  <view class="section">
+    <card title="我的孩子" extra="全部" showArrow="{{true}}" showTitleBar="{{true}}">
+      <loading visible="{{loadingChildren}}" text="加载中..."></loading>
+      <empty-state wx:if="{{!loadingChildren && children.length === 0}}" text="暂无绑定的孩子"></empty-state>
+      <view class="children-list" wx:if="{{!loadingChildren && children.length > 0}}">
+        <view class="child-item {{currentChildIndex === index ? 'active' : ''}}"
+          wx:for="{{children}}" wx:key="id" data-index="{{index}}"
+          bindtap="onSelectChild">
+          <view class="child-avatar">
+            <text>{{item.name[0]}}</text>
+          </view>
+          <view class="child-info">
+            <text class="child-name">{{item.name}}</text>
+            <text class="child-desc">剩余课时: {{item.remainingHours || 0}}</text>
+          </view>
+          <view class="check-icon" wx:if="{{currentChildIndex === index}}">✓</view>
+        </view>
+      </view>
+    </card>
+  </view>
+
+  <!-- 快捷功能 -->
+  <view class="section">
+    <card title="快捷功能" showTitleBar="{{true}}">
+      <view class="quick-links">
+        <view class="quick-link-item" bindtap="goToClassRecord">
+          <view class="link-icon icon-class">课</view>
+          <text>课时记录</text>
+        </view>
+        <view class="quick-link-item" bindtap="goToGrowthReport">
+          <view class="link-icon icon-report">报</view>
+          <text>成长报告</text>
+        </view>
+        <view class="quick-link-item" bindtap="goToPayment">
+          <view class="link-icon icon-payment">购</view>
+          <text>课程购买</text>
+        </view>
+        <view class="quick-link-item" bindtap="goToCoupons">
+          <view class="link-icon icon-coupon">券</view>
+          <text>我的优惠券</text>
+        </view>
+      </view>
+    </card>
+  </view>
+
+  <!-- 最近课时记录 -->
+  <view class="section">
+    <card title="最近课时" extra="查看全部" showArrow="{{true}}" bindtap="goToClassRecord">
+      <loading visible="{{loadingRecords}}" text="加载中..."></loading>
+      <empty-state wx:if="{{!loadingRecords && recentRecords.length === 0}}" text="暂无课时记录"></empty-state>
+      <view class="record-list" wx:if="{{!loadingRecords && recentRecords.length > 0}}">
+        <view class="record-item" wx:for="{{recentRecords}}" wx:key="id">
+          <view class="record-left">
+            <text class="record-course">{{item.courseName}}</text>
+            <text class="record-date">{{item.date}}</text>
+          </view>
+          <view class="record-right">
+            <text class="record-hours">-{{item.hours}}课时</text>
+          </view>
+        </view>
+      </view>
+    </card>
+  </view>
+</view>
