@@ -1,0 +1,179 @@
+.page-container {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding-bottom: 30rpx;
+}
+
+/* 头部 */
+.header {
+  position: relative;
+  padding: 40rpx 30rpx 60rpx;
+}
+
+.header-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 280rpx;
+  background: linear-gradient(135deg, #722ed1, #531dab);
+  border-radius: 0 0 40rpx 40rpx;
+}
+
+.header-content {
+  position: relative;
+  z-index: 1;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 0;
+}
+
+.avatar-wrap {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 24rpx;
+}
+
+.avatar-text {
+  font-size: 44rpx;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.user-detail {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-name {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 8rpx;
+}
+
+.user-role {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 4rpx 16rpx;
+  border-radius: 20rpx;
+}
+
+/* 区块 */
+.section {
+  padding: 0 24rpx;
+  margin-top: -10rpx;
+}
+
+/* 数据概览网格 */
+.stats-grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -10rpx;
+}
+
+.stat-card {
+  width: calc(50% - 20rpx);
+  margin: 10rpx;
+  background: linear-gradient(135deg, #f0f5ff, #e6f7ff);
+  border-radius: 16rpx;
+  padding: 28rpx 24rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-value {
+  font-size: 52rpx;
+  font-weight: 700;
+  color: #1890ff;
+  line-height: 1.2;
+}
+
+.stat-label {
+  font-size: 24rpx;
+  color: #666666;
+  margin-top: 8rpx;
+}
+
+/* 管理列表 */
+.manage-list {
+  margin: 0 -10rpx;
+}
+
+.manage-item {
+  display: flex;
+  align-items: center;
+  padding: 24rpx 10rpx;
+  border-bottom: 1rpx solid #f5f5f5;
+}
+
+.manage-item:last-child {
+  border-bottom: none;
+}
+
+.manage-item:active {
+  background-color: #f9f9f9;
+}
+
+.manage-icon {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #ffffff;
+  flex-shrink: 0;
+  margin-right: 24rpx;
+}
+
+.icon-user {
+  background: linear-gradient(135deg, #1890ff, #40a9ff);
+}
+
+.icon-course {
+  background: linear-gradient(135deg, #52c41a, #73d13d);
+}
+
+.icon-payment {
+  background: linear-gradient(135deg, #faad14, #ffc53d);
+}
+
+.icon-coupon {
+  background: linear-gradient(135deg, #ff4d4f, #ff7875);
+}
+
+.manage-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.manage-title {
+  font-size: 30rpx;
+  font-weight: 500;
+  color: #333333;
+  margin-bottom: 6rpx;
+}
+
+.manage-desc {
+  font-size: 24rpx;
+  color: #999999;
+}
+
+.manage-arrow {
+  font-size: 40rpx;
+  color: #cccccc;
+  font-weight: 300;
+}

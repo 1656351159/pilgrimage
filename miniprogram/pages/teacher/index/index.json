@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "教师端首页",
+  "usingComponents": {
+    "card": "../../../components/card/card",
+    "loading": "../../../components/loading/loading",
+    "empty-state": "../../../components/empty-state/empty-state"
+  }
+}
