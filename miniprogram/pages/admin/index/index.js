@@ -11,7 +11,7 @@ Page({
     userInfo: {},
     stats: {},
     avatarText: '',
-    loading: true
+    loading: false
   },
 
   onLoad() {

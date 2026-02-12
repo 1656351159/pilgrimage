@@ -14,8 +14,8 @@ Page({
     children: [],
     currentChildIndex: 0,
     recentRecords: [],
-    loadingChildren: true,
-    loadingRecords: true
+    loadingChildren: false,
+    loadingRecords: false
   },
 
   onLoad() {

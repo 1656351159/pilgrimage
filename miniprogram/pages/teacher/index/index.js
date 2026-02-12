@@ -21,7 +21,7 @@ Page({
     userInfo: {},
     avatarText: '',
     schedule: [],
-    loading: true
+    loading: false
   },
 
   onLoad() {
