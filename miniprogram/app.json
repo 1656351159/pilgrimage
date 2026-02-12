@@ -1,0 +1,54 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/parent/index/index",
+    "pages/parent/class-record/class-record",
+    "pages/parent/growth-report/growth-report",
+    "pages/parent/payment/payment",
+    "pages/parent/coupons/coupons",
+    "pages/teacher/index/index",
+    "pages/teacher/consume-class/consume-class",
+    "pages/teacher/write-report/write-report",
+    "pages/teacher/course-manage/course-manage",
+    "pages/admin/index/index",
+    "pages/admin/user-manage/user-manage",
+    "pages/admin/course-manage/course-manage",
+    "pages/admin/payment-manage/payment-manage",
+    "pages/admin/coupon-manage/coupon-manage"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#1890ff",
+    "navigationBarTitleText": "教育管理系统",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#f5f5f5",
+    "backgroundTextStyle": "dark"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#1890ff",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/parent/index/index",
+        "text": "首页",
+        "iconPath": "images/tab-home.png",
+        "selectedIconPath": "images/tab-home-active.png"
+      },
+      {
+        "pagePath": "pages/parent/class-record/class-record",
+        "text": "课时",
+        "iconPath": "images/tab-class.png",
+        "selectedIconPath": "images/tab-class-active.png"
+      },
+      {
+        "pagePath": "pages/parent/coupons/coupons",
+        "text": "我的",
+        "iconPath": "images/tab-mine.png",
+        "selectedIconPath": "images/tab-mine-active.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}
