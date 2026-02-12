@@ -1,0 +1,81 @@
+<view class="page-container">
+  <!-- 头部区域 -->
+  <view class="header">
+    <view class="header-bg"></view>
+    <view class="header-content">
+      <view class="user-info">
+        <view class="avatar-wrap">
+          <text class="avatar-text">{{userInfo.name ? userInfo.name[0] : '师'}}</text>
+        </view>
+        <view class="user-detail">
+          <text class="user-name">{{userInfo.name || '教师'}}</text>
+          <text class="user-role">教师端</text>
+        </view>
+      </view>
+      <view class="stats-grid">
+        <view class="stat-item">
+          <text class="stat-value">{{stats.studentCount || 0}}</text>
+          <text class="stat-label">学生数</text>
+        </view>
+        <view class="stat-divider"></view>
+        <view class="stat-item">
+          <text class="stat-value">{{stats.todayClasses || 0}}</text>
+          <text class="stat-label">今日课时</text>
+        </view>
+        <view class="stat-divider"></view>
+        <view class="stat-item">
+          <text class="stat-value">{{stats.reportCount || 0}}</text>
+          <text class="stat-label">成长报告</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 快捷功能 -->
+  <view class="section">
+    <card title="快捷功能" showTitleBar="{{true}}">
+      <view class="quick-links">
+        <view class="quick-link-item" bindtap="goToConsumeClass">
+          <view class="link-icon icon-consume">消</view>
+          <text>记录消课</text>
+        </view>
+        <view class="quick-link-item" bindtap="goToWriteReport">
+          <view class="link-icon icon-report">报</view>
+          <text>写成长报告</text>
+        </view>
+        <view class="quick-link-item" bindtap="goToStudents">
+          <view class="link-icon icon-student">学</view>
+          <text>我的学生</text>
+        </view>
+        <view class="quick-link-item" bindtap="goToCourseManage">
+          <view class="link-icon icon-course">课</view>
+          <text>课程管理</text>
+        </view>
+      </view>
+    </card>
+  </view>
+
+  <!-- 今日课程安排 -->
+  <view class="section">
+    <card title="今日课程" showTitleBar="{{true}}">
+      <loading visible="{{loadingSchedule}}" text="加载中..."></loading>
+      <empty-state wx:if="{{!loadingSchedule && todaySchedule.length === 0}}" text="今日暂无课程安排"></empty-state>
+      <view class="schedule-list" wx:if="{{!loadingSchedule && todaySchedule.length > 0}}">
+        <view class="schedule-item" wx:for="{{todaySchedule}}" wx:key="id">
+          <view class="schedule-time">
+            <text class="time-text">{{item.startTime}}</text>
+            <text class="time-dot">·</text>
+            <text class="time-text">{{item.endTime}}</text>
+          </view>
+          <view class="schedule-info">
+            <text class="course-name">{{item.courseName}}</text>
+            <text class="student-name">{{item.studentName}}</text>
+          </view>
+          <view class="schedule-status {{item.completed ? 'status-done' : 'status-pending'}}">
+            <text>{{item.completed ? '已完成' : '待上课'}}</text>
+          </view>
+        </view>
+      </view>
+    </card>
+  </view>
+</view>

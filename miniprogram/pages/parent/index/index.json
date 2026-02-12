@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "家长端首页",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "card": "../../../components/card/card",
+    "loading": "../../../components/loading/loading",
+    "empty-state": "../../../components/empty-state/empty-state"
+  }
+}

@@ -1,0 +1,82 @@
+<view class="page-container">
+  <!-- 头部区域 -->
+  <view class="header">
+    <view class="header-bg"></view>
+    <view class="header-content">
+      <view class="user-info">
+        <view class="avatar-wrap">
+          <text class="avatar-text">{{userInfo.name ? userInfo.name[0] : '管'}}</text>
+        </view>
+        <view class="user-detail">
+          <text class="user-name">{{userInfo.name || '管理员'}}</text>
+          <text class="user-role">管理端</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 数据概览 -->
+  <view class="section">
+    <card title="数据概览" showTitleBar="{{true}}">
+      <loading visible="{{loadingStats}}" text="加载中..."></loading>
+      <view class="stats-grid" wx:if="{{!loadingStats}}">
+        <view class="stat-card">
+          <text class="stat-value">{{stats.userCount || 0}}</text>
+          <text class="stat-label">总用户数</text>
+        </view>
+        <view class="stat-card">
+          <text class="stat-value">{{stats.studentCount || 0}}</text>
+          <text class="stat-label">学生数</text>
+        </view>
+        <view class="stat-card">
+          <text class="stat-value">{{stats.courseCount || 0}}</text>
+          <text class="stat-label">课程数</text>
+        </view>
+        <view class="stat-card">
+          <text class="stat-value">{{stats.orderCount || 0}}</text>
+          <text class="stat-label">本月订单</text>
+        </view>
+      </view>
+    </card>
+  </view>
+
+  <!-- 管理入口 -->
+  <view class="section">
+    <card title="管理功能" showTitleBar="{{true}}">
+      <view class="manage-list">
+        <view class="manage-item" bindtap="goToUserManage">
+          <view class="manage-icon icon-user">用</view>
+          <view class="manage-info">
+            <text class="manage-title">用户管理</text>
+            <text class="manage-desc">管理家长、教师、学生账号</text>
+          </view>
+          <text class="manage-arrow">›</text>
+        </view>
+        <view class="manage-item" bindtap="goToCourseManage">
+          <view class="manage-icon icon-course">课</view>
+          <view class="manage-info">
+            <text class="manage-title">课程管理</text>
+            <text class="manage-desc">添加、编辑课程信息</text>
+          </view>
+          <text class="manage-arrow">›</text>
+        </view>
+        <view class="manage-item" bindtap="goToPaymentManage">
+          <view class="manage-icon icon-payment">单</view>
+          <view class="manage-info">
+            <text class="manage-title">订单管理</text>
+            <text class="manage-desc">查看和处理支付订单</text>
+          </view>
+          <text class="manage-arrow">›</text>
+        </view>
+        <view class="manage-item" bindtap="goToCouponManage">
+          <view class="manage-icon icon-coupon">券</view>
+          <view class="manage-info">
+            <text class="manage-title">优惠券管理</text>
+            <text class="manage-desc">创建和管理优惠活动</text>
+          </view>
+          <text class="manage-arrow">›</text>
+        </view>
+      </view>
+    </card>
+  </view>
+</view>
