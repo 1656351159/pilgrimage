@@ -1,0 +1,49 @@
+<view class="container">
+  <card title="教师信息" showTitleBar="{{true}}">
+    <view class="flex-between">
+      <view>
+        <view class="text-bold">{{userInfo.name || userInfo.nickname || '教师'}}</view>
+        <view class="text-light text-small mt-10">教师端</view>
+      </view>
+      <view class="avatar">
+        <text class="text-primary text-bold">{{avatarText}}</text>
+      </view>
+    </view>
+  </card>
+
+  <card title="快捷功能" showTitleBar="{{true}}">
+    <view class="quick-links">
+      <view class="quick-link-item" bindtap="goConsume">
+        <view class="link-icon icon-class">课</view>
+        <text>课时核销</text>
+      </view>
+      <view class="quick-link-item" bindtap="goReport">
+        <view class="link-icon icon-report">报</view>
+        <text>写报告</text>
+      </view>
+      <view class="quick-link-item" bindtap="goCourse">
+        <view class="link-icon icon-payment">课</view>
+        <text>课程管理</text>
+      </view>
+    </view>
+  </card>
+
+  <card title="今日安排" showTitleBar="{{true}}">
+    <loading visible="{{loading}}" text="加载中..."></loading>
+    <empty-state wx:if="{{!loading && schedule.length === 0}}" text="今日暂无课程安排"></empty-state>
+    <view wx:if="{{!loading && schedule.length > 0}}">
+      <view class="list-item" wx:for="{{schedule}}" wx:key="id">
+        <view class="flex-1">
+          <view class="flex-between">
+            <text class="text-bold">{{item.courseName || item.course_name || '课程'}}</text>
+            <text class="text-primary text-small">{{item.timeText}}</text>
+          </view>
+          <view class="mt-10">
+            <text class="text-secondary text-small">{{item.studentName || item.student_name || ''}}</text>
+            <text class="text-light text-small ml-20">{{item.dateText}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </card>
+</view>

@@ -1,0 +1,52 @@
+/* 角色选择页样式 */
+.container {
+  padding: 60rpx 40rpx;
+  background: #f5f7fa;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  font-size: 48rpx;
+  color: #333;
+  margin-bottom: 60rpx;
+  font-weight: 600;
+}
+
+.role-card {
+  width: 100%;
+  max-width: 640rpx;
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 48rpx 40rpx;
+  margin-bottom: 32rpx;
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.2s;
+}
+
+.role-card:active {
+  transform: scale(0.98);
+}
+
+.icon {
+  font-size: 80rpx;
+  margin-bottom: 16rpx;
+}
+
+.name {
+  font-size: 36rpx;
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 12rpx;
+}
+
+.desc {
+  font-size: 28rpx;
+  color: #888;
+  text-align: center;
+}

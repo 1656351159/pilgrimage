@@ -9,7 +9,7 @@ const { post } = require('./request');
  * @returns {Promise}
  */
 const login = (code) => {
-  return post('/auth/wx-login', { code });
+  return post('/auth/login', { code });
 };
 
 /**

@@ -1,0 +1,20 @@
+<view class="container">
+  <card title="订单列表" showTitleBar="{{true}}">
+    <loading visible="{{loading}}" text="加载中..."></loading>
+    <empty-state wx:if="{{!loading && list.length === 0}}" text="暂无订单"></empty-state>
+    <view wx:if="{{!loading && list.length > 0}}">
+      <view class="order-row" wx:for="{{list}}" wx:key="id" data-id="{{item.id}}" bindtap="onTapDetail">
+        <view class="flex-1">
+          <view class="flex-between">
+            <text class="text-bold">订单 #{{item.id}}</text>
+            <text class="text-primary">{{item.amountText}}</text>
+          </view>
+          <view class="mt-10">
+            <text class="badge badge-primary">{{item.status || '—'}}</text>
+            <text class="text-light text-small ml-20">{{item.dateText}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </card>
+</view>

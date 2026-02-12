@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/role-select/index",
     "pages/login/login",
     "pages/parent/index/index",
     "pages/parent/class-record/class-record",
@@ -16,6 +17,12 @@
     "pages/admin/payment-manage/payment-manage",
     "pages/admin/coupon-manage/coupon-manage"
   ],
+  "usingComponents": {
+    "card": "/components/card/card",
+    "empty-state": "/components/empty-state/empty-state",
+    "loading": "/components/loading/loading",
+    "nav-bar": "/components/nav-bar/nav-bar"
+  },
   "window": {
     "navigationBarBackgroundColor": "#1890ff",
     "navigationBarTitleText": "教育管理系统",

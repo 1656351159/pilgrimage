@@ -56,15 +56,20 @@ Page({
 
       // 调用后端登录接口
       const res = await authService.login(loginRes.code);
-      const { token, userInfo } = res.data;
+      const token = res?.data?.token;
+      const userInfo = res?.data?.userInfo || res?.data?.user;
+
+      if (!token || !userInfo) {
+        throw new Error('登录接口返回数据不完整');
+      }
 
       // 保存登录信息
       authUtil.saveLoginInfo(token, userInfo);
       showSuccess('登录成功');
 
-      // 跳转到对应角色首页
+      // 跳转到角色选择页（统一入口）
       setTimeout(() => {
-        authUtil.navigateToHome(userInfo.role);
+        authUtil.navigateToRoleSelect();
       }, 500);
     } catch (err) {
       console.error('微信登录失败:', err);
@@ -78,6 +83,8 @@ Page({
    * 手机号密码登录
    */
   async onPhoneLogin() {
+    showError('暂不支持手机号登录，请使用微信一键登录');
+    return;
     if (!this.data.canSubmit || this.data.loading) return;
 
     const { phone, password } = this.data;
@@ -92,7 +99,12 @@ Page({
 
     try {
       const res = await authService.loginByPhone(phone, password);
-      const { token, userInfo } = res.data;
+      const token = res?.data?.token;
+      const userInfo = res?.data?.userInfo || res?.data?.user;
+
+      if (!token || !userInfo) {
+        throw new Error('登录接口返回数据不完整');
+      }
 
       // 保存登录信息
       authUtil.saveLoginInfo(token, userInfo);

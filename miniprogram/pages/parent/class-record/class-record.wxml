@@ -1,0 +1,36 @@
+<view class="container">
+  <card title="选择孩子" showTitleBar="{{true}}">
+    <loading visible="{{loadingChildren}}" text="加载中..."></loading>
+    <empty-state wx:if="{{!loadingChildren && children.length === 0}}" text="暂无绑定的孩子"></empty-state>
+    <view wx:if="{{!loadingChildren && children.length > 0}}">
+      <picker mode="selector" range="{{children}}" range-key="name" value="{{childIndex}}" bindchange="onChildPickerChange">
+        <view class="picker">
+          <text class="text-bold">{{selectedChild.name || ''}}</text>
+          <text class="text-light ml-20">切换</text>
+        </view>
+      </picker>
+    </view>
+  </card>
+
+  <card title="课时记录" showTitleBar="{{true}}">
+    <loading visible="{{loadingList}}" text="加载中..."></loading>
+    <empty-state wx:if="{{!loadingList && records.length === 0}}" text="暂无课时记录"></empty-state>
+    <view wx:if="{{!loadingList && records.length > 0}}">
+      <view class="list-item" wx:for="{{records}}" wx:key="id">
+        <view class="flex-1">
+          <view class="flex-between">
+            <text class="text-bold">{{item.courseName || item.course_name || '课程'}}</text>
+            <text class="text-error">-{{item.hours || item.consume_hours || 0}}课时</text>
+          </view>
+          <view class="mt-10">
+            <text class="text-light text-small">{{item.dateText}}</text>
+            <text wx:if="{{item.notes}}" class="text-secondary text-small ml-20">{{item.notes}}</text>
+          </view>
+        </view>
+      </view>
+      <view class="no-data" wx:if="{{!hasMore}}">
+        <text>没有更多了</text>
+      </view>
+    </view>
+  </card>
+</view>

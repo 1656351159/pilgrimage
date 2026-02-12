@@ -1,0 +1,69 @@
+<view class="container">
+  <card title="写成长报告" showTitleBar="{{true}}">
+    <loading visible="{{loading}}" text="加载中..."></loading>
+    <view wx:if="{{!loading}}">
+      <view class="form-group">
+        <view class="form-label">学生</view>
+        <picker mode="selector" range="{{students}}" range-key="name" value="{{studentIndex}}" bindchange="onStudentChange">
+          <view class="form-input flex-center">
+            <text>{{selectedStudentName}}</text>
+          </view>
+        </picker>
+      </view>
+
+      <view class="form-group">
+        <view class="form-label">课程</view>
+        <picker mode="selector" range="{{courses}}" range-key="name" value="{{courseIndex}}" bindchange="onCourseChange">
+          <view class="form-input flex-center">
+            <text>{{selectedCourseName}}</text>
+          </view>
+        </picker>
+      </view>
+
+      <view class="form-group">
+        <view class="form-label">标题</view>
+        <input class="form-input" value="{{title}}" bindinput="onTitleInput" placeholder="请输入标题" />
+      </view>
+
+      <view class="form-group">
+        <view class="form-label">内容</view>
+        <textarea class="form-textarea" value="{{content}}" bindinput="onContentInput" placeholder="请输入内容"></textarea>
+      </view>
+
+      <view class="form-group">
+        <view class="form-label">图片（选填）</view>
+        <view class="img-grid">
+          <view class="img-item" wx:for="{{images}}" wx:key="*this" data-index="{{index}}" bindtap="onRemoveImage">
+            <image class="img" src="{{item}}" mode="aspectFill"></image>
+          </view>
+          <view class="img-add" wx:if="{{images.length < 6}}" bindtap="onChooseImages">
+            <text class="text-primary text-bold">+</text>
+          </view>
+        </view>
+        <view class="text-light text-small mt-10">点击图片可删除</view>
+      </view>
+
+      <button class="btn-primary btn-block {{submitting ? 'btn-disabled' : ''}}" bindtap="onSubmit">
+        {{submitting ? '提交中...' : '提交'}}
+      </button>
+    </view>
+  </card>
+
+  <card title="最近报告" showTitleBar="{{true}}">
+    <empty-state wx:if="{{!loading && recent.length === 0}}" text="暂无报告"></empty-state>
+    <view wx:if="{{!loading && recent.length > 0}}">
+      <view class="list-item" wx:for="{{recent}}" wx:key="id">
+        <view class="flex-1">
+          <view class="flex-between">
+            <text class="text-bold">{{item.title || '成长报告'}}</text>
+            <text class="text-light text-small">{{item.dateText}}</text>
+          </view>
+          <view class="mt-10">
+            <text class="text-secondary text-small">{{item.studentName || item.student_name || ''}}</text>
+            <text class="text-light text-small ml-20">{{item.courseName || item.course_name || ''}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </card>
+</view>

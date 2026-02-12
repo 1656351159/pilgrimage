@@ -1,0 +1,44 @@
+<view class="container">
+  <card title="管理员" showTitleBar="{{true}}">
+    <view class="flex-between">
+      <view>
+        <view class="text-bold">{{userInfo.name || userInfo.nickname || '管理员'}}</view>
+        <view class="text-light text-small mt-10">管理端</view>
+      </view>
+      <view class="avatar">
+        <text class="text-primary text-bold">{{avatarText}}</text>
+      </view>
+    </view>
+  </card>
+
+  <card title="数据概览" showTitleBar="{{true}}">
+    <loading visible="{{loading}}" text="加载中..."></loading>
+    <view class="stats-grid" wx:if="{{!loading}}">
+      <view class="stats-item">
+        <text class="stats-num">{{stats.userCount || 0}}</text>
+        <text class="stats-label">用户</text>
+      </view>
+      <view class="stats-item">
+        <text class="stats-num">{{stats.courseCount || 0}}</text>
+        <text class="stats-label">课程</text>
+      </view>
+      <view class="stats-item">
+        <text class="stats-num">{{stats.orderCount || 0}}</text>
+        <text class="stats-label">订单</text>
+      </view>
+      <view class="stats-item">
+        <text class="stats-num">{{stats.couponCount || 0}}</text>
+        <text class="stats-label">优惠券</text>
+      </view>
+    </view>
+  </card>
+
+  <card title="管理入口" showTitleBar="{{true}}">
+    <view class="menu">
+      <view class="list-item" bindtap="goUsers"><text>用户管理</text></view>
+      <view class="list-item" bindtap="goCourses"><text>课程管理</text></view>
+      <view class="list-item" bindtap="goOrders"><text>订单管理</text></view>
+      <view class="list-item" bindtap="goCoupons"><text>优惠券管理</text></view>
+    </view>
+  </card>
+</view>

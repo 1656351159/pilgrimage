@@ -2,9 +2,16 @@
  * 统一请求封装
  */
 
-const baseUrl = 'https://your-api-domain.com/api';
+const baseUrl = 'http://localhost:3000/api';
 
 let requestCount = 0;
+
+const resolveBaseUrl = () => {
+  const app = getApp();
+  // 优先使用 globalData，其次是文件顶部的默认 baseUrl
+  // 移除 wx.getStorageSync('baseUrl') 以防止旧缓存干扰
+  return (app && app.globalData && app.globalData.baseUrl) || baseUrl;
+};
 
 /**
  * 显示加载状态
@@ -23,10 +30,14 @@ const showLoading = () => {
  * 隐藏加载状态
  */
 const hideLoading = () => {
+  if (requestCount <= 0) return;
+  
   requestCount--;
-  if (requestCount <= 0) {
-    requestCount = 0;
-    wx.hideLoading();
+  if (requestCount === 0) {
+    wx.hideLoading().catch((err) => {
+      // 忽略 hideLoading 可能的报错（如未 show 就 hide）
+      console.warn('hideLoading error ignored:', err);
+    });
   }
 };
 
@@ -56,26 +67,33 @@ const request = (options = {}) => {
     showLoading();
   }
 
+  const headers = {
+    'Content-Type': 'application/json',
+    ...header
+  };
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
+  }
+
   return new Promise((resolve, reject) => {
     wx.request({
-      url: `${app.globalData.baseUrl || baseUrl}${url}`,
+      url: `${resolveBaseUrl()}${url}`,
       method,
       data,
-      header: {
-        'Content-Type': 'application/json',
-        'Authorization': token ? `Bearer ${token}` : '',
-        ...header
-      },
+      header: headers,
+      timeout: 15000,
       success(res) {
-        if (res.statusCode === 200) {
-          if (res.data.code === 0 || res.data.code === 200) {
-            resolve(res.data);
+        const resData = res.data || {};
+
+        if (res.statusCode >= 200 && res.statusCode < 300) {
+          if (resData.code === 0 || resData.code === 200) {
+            resolve(resData);
           } else {
             wx.showToast({
-              title: res.data.message || '请求失败',
+              title: resData.message || '请求失败',
               icon: 'none'
             });
-            reject(res.data);
+            reject(resData);
           }
         } else if (res.statusCode === 401) {
           // 未授权，清除登录状态并跳转到登录页
@@ -88,11 +106,15 @@ const request = (options = {}) => {
           });
           reject({ code: 401, message: '登录已过期，请重新登录' });
         } else {
+          const message =
+            typeof resData === 'object' && resData && resData.message
+              ? resData.message
+              : `请求失败(${res.statusCode})`;
           wx.showToast({
-            title: `请求失败(${res.statusCode})`,
+            title: message,
             icon: 'none'
           });
-          reject({ code: res.statusCode, message: '请求失败' });
+          reject({ code: res.statusCode, message, data: resData });
         }
       },
       fail(err) {

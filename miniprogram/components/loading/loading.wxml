@@ -1,6 +1,6 @@
 <view class="loading-container" wx:if="{{visible}}">
   <view class="loading-spinner">
-    <view class="spinner-dot" wx:for="{{[1,2,3]}}" wx:key="*this"
+    <view class="spinner-dot" wx:for="{{dots}}" wx:key="*this"
       style="animation-delay: {{(item - 1) * 0.15}}s;">
     </view>
   </view>

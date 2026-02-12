@@ -1,0 +1,1 @@
+.course-item{background:#fff;border-radius:16rpx;padding:28rpx;margin-bottom:20rpx;box-shadow:var(--shadow);}

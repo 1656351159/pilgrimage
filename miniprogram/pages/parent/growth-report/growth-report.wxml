@@ -1,0 +1,19 @@
+<view class="container">
+  <card title="{{childName ? childName + '的成长报告' : '成长报告'}}" showTitleBar="{{true}}">
+    <loading visible="{{loading}}" text="加载中..."></loading>
+    <empty-state wx:if="{{!loading && reports.length === 0}}" text="暂无成长报告"></empty-state>
+    <view wx:if="{{!loading && reports.length > 0}}">
+      <view class="list-item" wx:for="{{reports}}" wx:key="id" data-id="{{item.id}}" bindtap="onTapReport">
+        <view class="flex-1">
+          <view class="flex-between">
+            <text class="text-bold">{{item.title || '成长报告'}}</text>
+            <text class="text-light text-small">{{item.dateText}}</text>
+          </view>
+          <view class="mt-10">
+            <text class="text-secondary text-small">{{item.summary || item.courseName || item.course_name || ''}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </card>
+</view>

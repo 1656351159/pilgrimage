@@ -5,7 +5,7 @@
     <view class="header-content">
       <view class="user-info">
         <view class="avatar-wrap">
-          <text class="avatar-text">{{userInfo.name ? userInfo.name[0] : '家'}}</text>
+          <text class="avatar-text">{{avatarText}}</text>
         </view>
         <view class="user-detail">
           <text class="user-name">{{userInfo.name || '家长'}}</text>
@@ -25,7 +25,7 @@
           wx:for="{{children}}" wx:key="id" data-index="{{index}}"
           bindtap="onSelectChild">
           <view class="child-avatar">
-            <text>{{item.name[0]}}</text>
+            <text>{{item.avatarText}}</text>
           </view>
           <view class="child-info">
             <text class="child-name">{{item.name}}</text>

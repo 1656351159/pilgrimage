@@ -1,0 +1,46 @@
+<view class="container">
+  <card title="购买信息" showTitleBar="{{true}}">
+    <loading visible="{{loading}}" text="加载中..."></loading>
+    <view wx:if="{{!loading}}">
+      <view class="form-group">
+        <view class="form-label">孩子</view>
+        <picker mode="selector" range="{{children}}" range-key="name" value="{{childIndex}}" bindchange="onChildChange">
+          <view class="form-input flex-center">
+            <text>{{selectedChild.name || '请选择'}}</text>
+          </view>
+        </picker>
+      </view>
+
+      <view class="form-group">
+        <view class="form-label">课程</view>
+        <picker mode="selector" range="{{courses}}" range-key="name" value="{{courseIndex}}" bindchange="onCourseChange">
+          <view class="form-input flex-center">
+            <text>{{selectedCourse.name || '暂无课程'}}</text>
+          </view>
+        </picker>
+        <view class="mt-10 text-light text-small" wx:if="{{selectedCourse && selectedCourse.id}}">
+          <text>价格 {{selectedCourse.priceText}}</text>
+          <text class="ml-20">总课时 {{selectedCourse.total_hours || selectedCourse.totalHours || 0}}</text>
+        </view>
+      </view>
+
+      <view class="form-group">
+        <view class="form-label">数量（课时）</view>
+        <input class="form-input" type="number" value="{{quantity}}" bindinput="onQuantityInput" />
+      </view>
+
+      <view class="form-group">
+        <view class="form-label">优惠券</view>
+        <picker mode="selector" range="{{coupons}}" range-key="name" value="{{couponIndex}}" bindchange="onCouponChange">
+          <view class="form-input flex-center">
+            <text>{{selectedCoupon.name || '不使用优惠券'}}</text>
+          </view>
+        </picker>
+      </view>
+
+      <button class="btn-primary btn-block {{creating ? 'btn-disabled' : ''}}" bindtap="onSubmit">
+        {{creating ? '处理中...' : '提交并支付'}}
+      </button>
+    </view>
+  </card>
+</view>

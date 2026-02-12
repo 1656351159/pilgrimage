@@ -2,9 +2,15 @@ const parentService = require('../../../services/parent');
 const authUtil = require('../../../utils/auth');
 const { formatDate } = require('../../../utils/util');
 
+const getFirstChar = (value, fallback) => {
+  const str = (value || '').toString();
+  return str ? str.slice(0, 1) : fallback;
+};
+
 Page({
   data: {
     userInfo: {},
+    avatarText: '',
     children: [],
     currentChildIndex: 0,
     recentRecords: [],
@@ -14,15 +20,23 @@ Page({
 
   onLoad() {
     if (!authUtil.checkLogin()) return;
-    const userInfo = authUtil.getUserInfo();
-    this.setData({ userInfo });
+    const userInfo = authUtil.getUserInfo() || {};
+    this.setData({
+      userInfo,
+      avatarText: getFirstChar(userInfo.name || userInfo.nickname, '家')
+    });
   },
 
   onShow() {
+    if (!authUtil.checkLogin()) return;
     this.loadChildren();
   },
 
   onPullDownRefresh() {
+    if (!authUtil.checkLogin()) {
+      wx.stopPullDownRefresh();
+      return;
+    }
     this.loadChildren().then(() => {
       wx.stopPullDownRefresh();
     });
@@ -35,7 +49,10 @@ Page({
     this.setData({ loadingChildren: true });
     try {
       const res = await parentService.getChildren();
-      const children = res.data || [];
+      const children = (res.data || []).map(item => ({
+        ...item,
+        avatarText: getFirstChar(item.name, '子')
+      }));
       this.setData({
         children,
         loadingChildren: false
