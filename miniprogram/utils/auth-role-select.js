@@ -6,15 +6,9 @@ const navigateToRoleSelect = () => {
   wx.reLaunch({ url: '/pages/role-select/index' });
 };
 
-module.exports = {
-  isLoggedIn,
-  getUserInfo,
-  getUserRole,
-  getToken,
-  saveLoginInfo,
-  clearLoginInfo,
-  checkLogin,
-  getHomePageByRole,
-  navigateToHome,
-  navigateToRoleSelect // 新增
-};
+// 重新导出 auth.js 的完整实现，保持向后兼容
+const authUtil = require('./auth');
+
+module.exports = Object.assign({}, authUtil, {
+  navigateToRoleSelect
+});
