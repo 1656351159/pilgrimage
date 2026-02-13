@@ -1,0 +1,63 @@
+<view class="container">
+  <card title="新增核销" showTitleBar="{{true}}">
+    <loading visible="{{loading}}" text="加载中..."></loading>
+    <view wx:if="{{!loading}}">
+      <view class="form-group">
+        <view class="form-label">学生</view>
+        <picker mode="selector" range="{{students}}" range-key="name" value="{{studentIndex}}" bindchange="onStudentChange">
+          <view class="form-input flex-center">
+            <text>{{selectedStudentName}}</text>
+          </view>
+        </picker>
+      </view>
+
+      <view class="form-group">
+        <view class="form-label">课程</view>
+        <picker mode="selector" range="{{courses}}" range-key="name" value="{{courseIndex}}" bindchange="onCourseChange">
+          <view class="form-input flex-center">
+            <text>{{selectedCourseName}}</text>
+          </view>
+        </picker>
+      </view>
+
+      <view class="form-group">
+        <view class="form-label">消耗课时</view>
+        <input class="form-input" type="number" value="{{hours}}" bindinput="onHoursInput" />
+      </view>
+
+      <view class="form-group">
+        <view class="form-label">上课日期</view>
+        <picker mode="date" value="{{date}}" bindchange="onDateChange">
+          <view class="form-input flex-center"><text>{{date}}</text></view>
+        </picker>
+      </view>
+
+      <view class="form-group">
+        <view class="form-label">备注</view>
+        <textarea class="form-textarea" value="{{notes}}" bindinput="onNotesInput" placeholder="选填"></textarea>
+      </view>
+
+      <button class="btn-primary btn-block {{submitting ? 'btn-disabled' : ''}}" bindtap="onSubmit">
+        {{submitting ? '提交中...' : '提交'}}
+      </button>
+    </view>
+  </card>
+
+  <card title="最近核销记录" showTitleBar="{{true}}">
+    <empty-state wx:if="{{!loading && recent.length === 0}}" text="暂无记录"></empty-state>
+    <view wx:if="{{!loading && recent.length > 0}}">
+      <view class="list-item" wx:for="{{recent}}" wx:key="id">
+        <view class="flex-1">
+          <view class="flex-between">
+            <text class="text-bold">{{item.studentName || item.student_name || '学生'}}</text>
+            <text class="text-error">-{{item.hours || 0}}课时</text>
+          </view>
+          <view class="mt-10">
+            <text class="text-secondary text-small">{{item.courseName || item.course_name || '课程'}}</text>
+            <text class="text-light text-small ml-20">{{item.date || item.createdAt || ''}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </card>
+</view>

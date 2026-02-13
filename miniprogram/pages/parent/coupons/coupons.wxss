@@ -1,0 +1,5 @@
+.coupon-item{display:flex;align-items:center;justify-content:space-between;background:#fff;border-radius:16rpx;padding:28rpx;margin-bottom:20rpx;box-shadow:var(--shadow);}
+.coupon-left{display:flex;flex-direction:column;}
+.coupon-value{font-size:44rpx;font-weight:700;color:var(--primary-color);}
+.coupon-name{margin-top:10rpx;color:var(--text-secondary);}
+.coupon-right{text-align:right;}

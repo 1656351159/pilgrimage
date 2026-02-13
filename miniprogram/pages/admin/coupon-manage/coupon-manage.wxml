@@ -1,0 +1,78 @@
+<view class="container">
+  <card title="{{form.id ? '编辑优惠券' : '创建优惠券'}}" showTitleBar="{{true}}">
+    <view class="form-group">
+      <view class="form-label">优惠码</view>
+      <input class="form-input" value="{{form.code}}" bindinput="onCode" placeholder="如：NEW2026" />
+    </view>
+    <view class="form-group">
+      <view class="form-label">名称</view>
+      <input class="form-input" value="{{form.name}}" bindinput="onName" placeholder="如：新年优惠" />
+    </view>
+    <view class="form-group">
+      <view class="form-label">类型</view>
+      <radio-group bindchange="onType">
+        <label class="radio-item"><radio value="fixed" checked="{{form.type === 'fixed'}}" />满减</label>
+        <label class="radio-item"><radio value="percent" checked="{{form.type === 'percent'}}" />折扣</label>
+      </radio-group>
+    </view>
+    <view class="form-group">
+      <view class="form-label">面值（分或百分比）</view>
+      <input class="form-input" type="number" value="{{form.value}}" bindinput="onValue" />
+    </view>
+    <view class="form-group">
+      <view class="form-label">最低使用金额（分）</view>
+      <input class="form-input" type="number" value="{{form.min_amount}}" bindinput="onMinAmount" />
+    </view>
+    <view class="form-group">
+      <view class="form-label">开始日期</view>
+      <picker mode="date" value="{{form.start_date}}" bindchange="onStartDate">
+        <view class="form-input flex-center"><text>{{form.start_date || '不限制'}}</text></view>
+      </picker>
+    </view>
+    <view class="form-group">
+      <view class="form-label">过期日期</view>
+      <picker mode="date" value="{{form.expire_date}}" bindchange="onExpireDate">
+        <view class="form-input flex-center"><text>{{form.expire_date || '不限制'}}</text></view>
+      </picker>
+    </view>
+    <view class="form-group">
+      <view class="form-label">发行总量（0 不限）</view>
+      <input class="form-input" type="number" value="{{form.total_count}}" bindinput="onTotalCount" />
+    </view>
+    <view class="form-group">
+      <view class="form-label">状态</view>
+      <radio-group bindchange="onStatus">
+        <label class="radio-item"><radio value="1" checked="{{form.status === 1}}" />启用</label>
+        <label class="radio-item"><radio value="0" checked="{{form.status === 0}}" />停用</label>
+      </radio-group>
+    </view>
+    <view class="flex-between">
+      <button class="btn-outline" wx:if="{{form.id}}" bindtap="onCancelEdit">取消</button>
+      <button class="btn-primary flex-1 ml-20" bindtap="onSubmit">保存</button>
+    </view>
+  </card>
+
+  <card title="优惠券列表" showTitleBar="{{true}}">
+    <loading visible="{{loading}}" text="加载中..."></loading>
+    <empty-state wx:if="{{!loading && list.length === 0}}" text="暂无优惠券"></empty-state>
+    <view wx:if="{{!loading && list.length > 0}}">
+      <view class="coupon-row" wx:for="{{list}}" wx:key="id">
+        <view class="flex-1">
+          <view class="flex-between">
+            <text class="text-bold">{{item.name}}</text>
+            <text class="text-primary">{{item.valueText}}</text>
+          </view>
+          <view class="mt-10">
+            <text class="badge badge-primary">{{item.type}}</text>
+            <text class="text-light text-small ml-20">码 {{item.code}}</text>
+          </view>
+          <view class="mt-10 text-light text-small">有效期至 {{item.expireText || '—'}}</view>
+        </view>
+        <view class="row-actions">
+          <text class="action" data-id="{{item.id}}" bindtap="onTapEdit">编辑</text>
+          <text class="action text-error ml-20" data-id="{{item.id}}" bindtap="onDelete">删除</text>
+        </view>
+      </view>
+    </view>
+  </card>
+</view>

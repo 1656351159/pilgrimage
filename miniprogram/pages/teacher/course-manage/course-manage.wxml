@@ -1,0 +1,20 @@
+<view class="container">
+  <card title="我负责的课程" showTitleBar="{{true}}">
+    <loading visible="{{loading}}" text="加载中..."></loading>
+    <empty-state wx:if="{{!loading && courses.length === 0}}" text="暂无课程"></empty-state>
+    <view wx:if="{{!loading && courses.length > 0}}">
+      <view class="course-item" wx:for="{{courses}}" wx:key="id">
+        <view class="flex-between">
+          <text class="text-bold">{{item.name}}</text>
+          <text class="text-primary">{{item.priceText}}</text>
+        </view>
+        <view class="mt-10">
+          <text class="badge badge-primary">{{item.type || '课程'}}</text>
+          <text class="text-light text-small ml-20">总课时 {{item.total_hours || item.totalHours || 0}}</text>
+          <text class="text-light text-small ml-20">{{(item.status === 0 || item.status === '0') ? '下架' : '上架'}}</text>
+        </view>
+        <view class="mt-10 text-secondary text-small">{{item.description || ''}}</view>
+      </view>
+    </view>
+  </card>
+</view>

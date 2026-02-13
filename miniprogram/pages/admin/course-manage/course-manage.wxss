@@ -1,0 +1,4 @@
+.radio-item{margin-right:24rpx;}
+.course-row{display:flex;align-items:center;gap:16rpx;background:#fff;border-radius:16rpx;padding:24rpx;margin-bottom:16rpx;box-shadow:var(--shadow);}
+.row-actions{display:flex;flex-direction:row;align-items:center;}
+.action{color:var(--primary-color);}

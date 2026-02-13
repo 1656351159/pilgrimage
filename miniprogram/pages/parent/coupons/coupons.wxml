@@ -1,0 +1,18 @@
+<view class="container">
+  <card title="我的优惠券" showTitleBar="{{true}}">
+    <loading visible="{{loading}}" text="加载中..."></loading>
+    <empty-state wx:if="{{!loading && coupons.length === 0}}" text="暂无可用优惠券"></empty-state>
+    <view wx:if="{{!loading && coupons.length > 0}}">
+      <view class="coupon-item" wx:for="{{coupons}}" wx:key="id">
+        <view class="coupon-left">
+          <text class="coupon-value">{{item.valueText}}</text>
+          <text class="coupon-name">{{item.name || item.title || '优惠券'}}</text>
+        </view>
+        <view class="coupon-right">
+          <text class="text-light text-small">有效期至 {{item.expireText || '—'}}</text>
+          <text class="text-light text-small mt-10">优惠码 {{item.code || '—'}}</text>
+        </view>
+      </view>
+    </view>
+  </card>
+</view>

@@ -1,0 +1,22 @@
+<!-- 角色选择页 -->
+<view class="container">
+  <view class="title">请选择您的身份</view>
+
+  <view class="role-card" data-role="parent" bindtap="onSelectRole">
+    <text class="icon">👨‍👩‍👧‍👦</text>
+    <text class="name">家长</text>
+    <text class="desc">查看子女课时、成长报告、购买课程</text>
+  </view>
+
+  <view class="role-card" data-role="teacher" bindtap="onSelectRole">
+    <text class="icon">👨‍🏫</text>
+    <text class="name">教师</text>
+    <text class="desc">核销课时、撰写成长报告、管理课程</text>
+  </view>
+
+  <view class="role-card" data-role="admin" bindtap="onSelectRole">
+    <text class="icon">👨‍💼</text>
+    <text class="name">管理员</text>
+    <text class="desc">用户、课程、订单、优惠券全览</text>
+  </view>
+</view>

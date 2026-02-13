@@ -1,0 +1,5 @@
+{
+  "navigationBarTitleText": "课时记录",
+  "enablePullDownRefresh": true,
+  "onReachBottomDistance": 80
+}
